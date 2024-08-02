@@ -10,7 +10,7 @@ Y="\e[33m"
 N="\e[0m"
 
 echo "Please enter DB password:"
-read -s mysql_root_password
+read -s mysql_root_password   # -s hide the password what we are entering
 
 VALIDATE(){
    if [ $1 -ne 0 ]
@@ -55,7 +55,7 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATE $? "Downloading backend code"
 
 cd /app
-rm -rf /app/*
+rm -rf /app/*             # this removes all the content in app directory and then it will unzip again. this helps when we try to run again n again
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extracted backend code"
 
@@ -79,7 +79,7 @@ dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL Client"
 
 mysql -h db.kalpanadevops.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
-VALIDATE $? "Schema loading"
+VALIDATE $? "Schema loading"   
 
 systemctl restart backend &>>$LOGFILE
 VALIDATE $? "Restarting Backend"
