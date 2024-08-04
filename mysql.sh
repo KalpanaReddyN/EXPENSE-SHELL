@@ -8,8 +8,9 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+
 echo "Please enter DB password:"
-read -s mysql_root_password
+read -s mysql_root_password         # -s hide the password what we are entering
 
 VALIDATE(){
    if [ $1 -ne 0 ]
@@ -52,3 +53,4 @@ then
 else
     echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
 fi
+
